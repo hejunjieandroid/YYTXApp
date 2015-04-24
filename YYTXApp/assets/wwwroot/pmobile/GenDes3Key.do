@@ -1,0 +1,1 @@
+{"Password":"","VerifyTimes":0,"TransPassword":"","UserId":"luowei","ChannelId":"HTTP.MOBILE","KeyType":1,"TransCode":"GenDes3Key","LoginType":"M","BankId":"9999","CreateTime":"2014-03-18 16:00:48","KeyValue":"469,732,271","BankSeq":1,"_RejCode":"FIN0000","ExpiryTime":"2014-03-18 16:05:48"}

@@ -1,0 +1,35 @@
+{
+    "BankSeq":1,
+    "TransPassword":"",
+    "_RejCode":"FIN0000",
+    "BankId":"9999",
+    "_locale":"zh_CN",
+    "Password":"",
+    "ChannelId":"HTTP.MOBILE",
+    "List":[
+        {
+            "BankAcTypeName":"金瑞交通卡",
+            "AcNo":"6212690100216893",
+            "BankAcType":"6023",
+            "AcName":"罗伟"
+        },
+        {
+            "BankAcTypeName":"金瑞白金卡",
+            "AcNo":"6222750800078866",
+            "BankAcType":"6008",
+            "AcName":"罗伟"
+        },
+        {
+            "BankAcTypeName":"金瑞卡",
+            "AcNo":"6222750102527479",
+            "BankAcType":"6001",
+            "AcName":"罗伟"
+        },
+        {
+            "BankAcTypeName":"金瑞卡",
+            "AcNo":"6222750103823570",
+            "BankAcType":"6001",
+            "AcName":"罗伟"
+        }
+    ]
+}

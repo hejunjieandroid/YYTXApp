@@ -1,0 +1,10 @@
+{
+	"_RejCode":"000000",
+	"BillNo":"回单编号",
+	"_JnlNo":"网银流水号",
+	"HostJnlNo":"核心流水号",
+	"TransTime":"交易时间",
+	"_exceptionMessageCode":"错误代码",
+	"_exceptionMessage":"错误原因",
+	"_JnlStatus":"交易处理状态"
+}

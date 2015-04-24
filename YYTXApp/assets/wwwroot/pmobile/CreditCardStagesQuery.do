@@ -1,0 +1,29 @@
+{
+	"_RejCode":"000000",
+	"List":[
+		{
+			"RequestNum":"8200201403011002",
+			"RequestDate":"2014年03月01日",
+			"ProductName":"小米手机4s",
+			"StagesSum":"300",
+			"StagesCount":"5",
+			"RequestState":"成功"
+		},
+		{
+			"RequestNum":"8200201403021003",
+			"RequestDate":"2014年03月02日",
+			"ProductName":"MacBook",
+			"StagesSum":"1000",
+			"StagesCount":"15",
+			"RequestState":"成功"
+		},
+		{
+			"RequestNum":"8200201403041005",
+			"RequestDate":"2014年03月04日",
+			"ProductName":"法拉利",
+			"StagesSum":"200000",
+			"StagesCount":"20",
+			"RequestState":"失败"
+		}
+	]
+}

@@ -1,0 +1,32 @@
+{
+	"_RejCode":"000000",
+	"List":[
+		{
+			"Code":"债券代码",
+			"Name":"债券名称",
+			"AcNo":"资金卡号",
+			"InterestDate":"起息日",
+			"DueDate":"到期日",
+			"Rate":"票面利率",
+			"Amount":"购买金额"
+		},
+		{
+			"Code":"债券代码",
+			"Name":"债券名称",
+			"AcNo":"资金卡号",
+			"InterestDate":"起息日",
+			"DueDate":"到期日",
+			"Rate":"票面利率",
+			"Amount":"购买金额"
+		},
+		{
+			"Code":"债券代码",
+			"Name":"债券名称",
+			"AcNo":"资金卡号",
+			"InterestDate":"起息日",
+			"DueDate":"到期日",
+			"Rate":"票面利率",
+			"Amount":"购买金额"
+		}
+	]
+}

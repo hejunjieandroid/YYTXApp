@@ -1,0 +1,21 @@
+{
+    "_RejCode":"FIN0000",
+    "PrdCode":"产品编码",
+    "PrdName":"产品名称",
+    "CurrType":"币种",
+    "PfirstAmt":"起点金额",
+    "PappAmt":"xxxxx",
+    "TypeName":"产品类型",
+    "EstabDate":"起息日",
+    "EstabEndDate":"到期日",
+    "RiskLevel":"产品风险等级",
+    "PsubUnit":"递增金额",
+    "ModelComment":"参考年化收益率",
+    "IpoStartDate":"xxxx",
+    "IpoEndDate":"xxxx",
+    "Status":"产品状态",
+    "TransWay":"产品类型",
+    "Amount":"购买金额",
+    "AcNo":"购买账号",
+    "ClientManager":"银行推荐人工号"
+}
