@@ -4,27 +4,88 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
-    android:background="@drawable/titlebg" >
+    android:background="@drawable/bottom_bg"
+    android:orientation="horizontal" >
 
-    <ImageView
-        android:id="@+id/head_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:src="@drawable/back" />
+    <RelativeLayout
+        android:id="@+id/rl_bottom_left"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" >
 
-    <ImageView
-        android:id="@+id/head_b"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:src="@drawable/back" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
 
-    <ImageView
-        android:id="@+id/head_home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="10dip"
-        android:src="@drawable/home" />
+            <ImageView
+                android:id="@+id/img_bottom_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bottom_left_img_n" />
+
+            <TextView
+                android:id="@+id/tv_bottom_left"
+                style="@style/tv_style"
+                android:text="@string/tv_bottom_left_txt"
+                android:textColor="@color/tv_bottom_n" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_bottom_center"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/img_bottom_center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bottom_center_img_n" />
+
+            <TextView
+                android:id="@+id/tv_bottom_center"
+                style="@style/tv_style"
+                android:text="@string/tv_bottom_center_txt"
+                android:textColor="@color/tv_bottom_n" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_bottom_right"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/img_bottom_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bottom_right_img_n" />
+
+            <TextView
+                android:id="@+id/tv_bottom_right"
+                style="@style/tv_style"
+                android:text="@string/tv_bottom_right_txt"
+                android:textColor="@color/tv_bottom_n" />
+        </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

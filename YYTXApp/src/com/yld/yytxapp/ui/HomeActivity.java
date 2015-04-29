@@ -5,9 +5,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
 import com.yld.core.base.BaseFragmentActivity;
+import com.yld.core.utils.AlertUtil;
 import com.yld.core.utils.Util;
 import com.yld.core.view.ViewPagerScroller;
 import com.yld.yytxapp.adapter.MyPagerAdapter;
@@ -155,18 +160,23 @@ public class HomeActivity extends BaseFragmentActivity implements OnClickListene
 				FinishActivity();
 			} else {
 				UserInfo userInfo = new UserInfo();
-				userInfo.setUserName(constant.getToggleString("UserId"));//不到登录页（是否存储id,checkbox导致）
+				userInfo.setUserName(constant.getToggleString("UserId"));// 不到登录页（是否存储id,checkbox导致）
 				userInfo.setPassword(constant.getToggleString("LoginPassword"));
 				userInfo.setAccess_token(constant.getToggleString(constant.ACCESS_TOKEN));
 				userInfo.setExpired(constant.getToggleString(constant.EXPIRED));
-				
+
 				constant.setUserInfo(userInfo);
 				constant.setLogin(true);
 			}
 
 			break;
 		case R.id.btn_stk:
-			startActivity(getPackageManager().getLaunchIntentForPackage("com.android.stk"));
+			try {
+				Intent intent = getPackageManager().getLaunchIntentForPackage("com.android.stk");
+				startActivity(intent);
+			} catch (Exception e) {
+				AlertUtil.ToastMessageShort(activity, "未安装应用程序");
+			}
 			break;
 		case R.id.btn_buystk:
 
@@ -183,7 +193,7 @@ public class HomeActivity extends BaseFragmentActivity implements OnClickListene
 	private boolean goLogin() {
 		// TODO Auto-generated method stub
 		boolean gotologin = false;
-		if("".equals(constant.getToggleString("UserId"))){
+		if ("".equals(constant.getToggleString("UserId"))) {
 			gotologin = true;
 		} else if ("".equals(constant.getToggleString(constant.ACCESS_TOKEN)) || "".equals(constant.getToggleString(constant.EXPIRED))) {
 			gotologin = true;

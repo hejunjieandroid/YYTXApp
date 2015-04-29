@@ -43,8 +43,7 @@ public class DeviceUtil {
 	 * @return String
 	 */
 	public static String getMac(Context context) {
-		WifiManager wifi = (WifiManager) context
-				.getSystemService(Context.WIFI_SERVICE);
+		WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
 
 		WifiInfo info = wifi.getConnectionInfo();
 
@@ -59,11 +58,61 @@ public class DeviceUtil {
 	public static int getSDKVersion() {
 		int version = 0;
 		try {
-			version = Integer.valueOf(android.os.Build.VERSION.SDK);
+			version = android.os.Build.VERSION.SDK_INT;
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
 		return version;
+	}
+
+	/**
+	 * @brief 获取手机系统信息
+	 * Build.BOARD // 主板  
+Build.BRAND // android系统定制商  
+Build.CPU_ABI // cpu指令集  
+Build.DEVICE // 设备参数  
+Build.DISPLAY // 显示屏参数  
+Build.FINGERPRINT // 硬件名称  
+Build.HOST  
+Build.ID // 修订版本列表  
+Build.MANUFACTURER // 硬件制造商  
+Build.MODEL // 版本  
+Build.PRODUCT // 手机制造商  
+Build.TAGS // 描述build的标签  
+Build.TIME  
+Build.TYPE // builder类型  
+Build.USER  
+	 * @return string
+	 * */
+	public static String getSystemInfo() {
+		StringBuffer systeminfo = new StringBuffer();
+		systeminfo.append("BOARD主板=" + android.os.Build.BOARD + ",");
+		systeminfo.append("BOOTLOADER=" + android.os.Build.BOOTLOADER + ",");
+		systeminfo.append("BRAND系统定制商=" + android.os.Build.BRAND + ",");
+		systeminfo.append("CPU_ABIcpu指令集=" + android.os.Build.CPU_ABI + ",");
+		systeminfo.append("CPU_ABI2=" + android.os.Build.CPU_ABI2 + ",");
+		systeminfo.append("DEVICE设备参数=" + android.os.Build.DEVICE + ",");
+		systeminfo.append("DISPLAY显示屏参数  =" + android.os.Build.DISPLAY + ",");
+		systeminfo.append("FINGERPRINT硬件名称=" + android.os.Build.FINGERPRINT + ",");
+		systeminfo.append("HARDWARE=" + android.os.Build.HARDWARE + ",");
+		systeminfo.append("HOST=" + android.os.Build.HOST + ",");
+		systeminfo.append("ID修订版本列表 =" + android.os.Build.ID + ",");
+		systeminfo.append("MANUFACTURER硬件制造商  =" + android.os.Build.MANUFACTURER + ",");
+		systeminfo.append("MODEL版本 =" + android.os.Build.MODEL + ",");
+		systeminfo.append("PRODUCT手机制造商  =" + android.os.Build.PRODUCT + ",");
+		systeminfo.append("RADIO=" + android.os.Build.RADIO + ",");
+		// systeminfo.append("SERIAL="+android.os.Build.SERIAL+",");
+		systeminfo.append("TAGS描述build的标签 =" + android.os.Build.TAGS + ",");
+//		systeminfo.append("TIME=" + android.os.Build.TIME + ",");
+		systeminfo.append("TYPEbuilder类型  =" + android.os.Build.TYPE + ",");
+		systeminfo.append("UNKNOWN=" + android.os.Build.UNKNOWN + ",");
+		systeminfo.append("USER=" + android.os.Build.USER + ",");
+		systeminfo.append("VERSION.RELEASE=" + android.os.Build.VERSION.RELEASE + ",");
+		systeminfo.append("VERSION.CODENAME=" + android.os.Build.VERSION.CODENAME + ",");
+		systeminfo.append("VERSION.INCREMENTAL=" + android.os.Build.VERSION.INCREMENTAL + ",");
+		systeminfo.append("VERSION.SDK=" + android.os.Build.VERSION.SDK + ",");
+		systeminfo.append("VERSION.SDK_INT=" + android.os.Build.VERSION.SDK_INT);
+		return systeminfo.toString();
 	}
 
 	/**
@@ -82,9 +131,19 @@ public class DeviceUtil {
 	 * @return String
 	 * */
 	public static String getIMEI(Context context) {
-		TelephonyManager tm = (TelephonyManager) context
-				.getSystemService("phone");
+		TelephonyManager tm = (TelephonyManager) context.getSystemService("phone");
 		return tm.getDeviceId();
+	}
+
+	/**
+	 * @brief 获取手机号
+	 * @param context
+	 *            上下文
+	 * @return String
+	 * */
+	public static String getLine1Number(Context context) {
+		TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+		return tm.getLine1Number();
 	}
 
 	/**
@@ -140,14 +199,9 @@ public class DeviceUtil {
 		// 判断手机当前网络开关状态 wifi gprs
 		boolean isnetwork = true;
 		try {
-			ConnectivityManager cm = (ConnectivityManager) context
-					.getSystemService(Context.CONNECTIVITY_SERVICE);
-			boolean isWifiConnected = cm.getNetworkInfo(
-					ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED ? true
-					: false;
-			boolean isGprsConnected = cm.getNetworkInfo(
-					ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ? true
-					: false;
+			ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+			boolean isWifiConnected = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED ? true : false;
+			boolean isGprsConnected = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ? true : false;
 			if (isWifiConnected || isGprsConnected) {
 				isnetwork = true;
 			} else {
@@ -179,8 +233,7 @@ public class DeviceUtil {
 		int statusBarHeight = frame.top;
 		// 获取屏幕长和高
 		int width = activity.getWindowManager().getDefaultDisplay().getWidth();
-		int height = activity.getWindowManager().getDefaultDisplay()
-				.getHeight();
+		int height = activity.getWindowManager().getDefaultDisplay().getHeight();
 		// 去掉标题栏
 		// Bitmap b = Bitmap.createBitmap(b1, 0, 25, 320, 455);
 		Bitmap b = Bitmap.createBitmap(b1, 0, 0, width, height);
@@ -230,8 +283,7 @@ public class DeviceUtil {
 	 * @return boolean
 	 */
 	public static boolean isOpenGPS(Context context) {
-		LocationManager alm = (LocationManager) context
-				.getSystemService(Context.LOCATION_SERVICE);
+		LocationManager alm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 		if (alm.isProviderEnabled(android.location.LocationManager.GPS_PROVIDER)) {
 			return true;
 		} else {
@@ -251,8 +303,7 @@ public class DeviceUtil {
 		int versionCode = 0;
 		try {
 			// 获取软件版本号，对应AndroidManifest.xml下android:versionCode
-			versionCode = context.getPackageManager().getPackageInfo(
-					context.getPackageName(), 0).versionCode;
+			versionCode = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionCode;
 		} catch (NameNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -269,8 +320,7 @@ public class DeviceUtil {
 		String versionName = "";
 		try {
 			// 获取软件版本号，对应AndroidManifest.xml下android:versionCode
-			versionName = context.getPackageManager().getPackageInfo(
-					context.getPackageName(), 0).versionName;
+			versionName = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
 		} catch (NameNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -291,13 +341,11 @@ public class DeviceUtil {
 		PackageManager packageManager = context.getPackageManager();
 		PackageInfo packageInfo;
 		try {
-			packageInfo = packageManager.getPackageInfo(
-					context.getPackageName(), PackageManager.GET_SIGNATURES);
+			packageInfo = packageManager.getPackageInfo(context.getPackageName(), PackageManager.GET_SIGNATURES);
 			File f = new File(packageInfo.applicationInfo.sourceDir);
 			for (Signature signature : packageInfo.signatures) {
 				// 取到Package的签名
-				SIGNATURE_FLAG = MD5Util
-						.getMD5String(signature.toCharsString());
+				SIGNATURE_FLAG = MD5Util.getMD5String(signature.toCharsString());
 			}
 			// 取到APKMD5
 			APKMD5_FLAG = MD5Util.getFileMD5String(f);
@@ -336,23 +384,27 @@ public class DeviceUtil {
 		Map<String, String> map = new HashMap<String, String>();
 		map.clear();
 		// IMEI
-		map.put("DeviceId", getIMEI(context));
+		// map.put("DeviceId", getIMEI(context));
+		// Line1Number
+		map.put("phoneNumber", getLine1Number(context));
+		// SystemInfo
+		map.put("SystemInfo", getSystemInfo());
 		// 判断sd卡是否存在,1存在，0不存在
 		map.put("SDFlag", String.valueOf(hasSDCard()));
 		// 获取设备型号
 		map.put("Model", getModel());
 		// 设备类型,0：手机1：平板2：电视3：其他
-		map.put("DeviceType", "0");
+		// map.put("DeviceType", "0");
 		// Mac地址
 		map.put("MacAddress", getMac(context));
 		// 系统版本号
-		map.put("SYSVersion", String.valueOf(getSDKVersion()));
+//		map.put("SYSVersion", String.valueOf(getSDKVersion()));
 		// 版本号
 		map.put("VersionCode", String.valueOf(getVersionCode(context)));
 		// 版本名称
 		map.put("VersionName", getVersionName(context));
 		// 客户端类型
-		map.put("ClientType", "Android");
+		// map.put("ClientType", "Android");
 		// 屏幕信息
 		map.put("DisplayMetrics", getDisplayMetrics(context));
 		// Root标志0：没有root（未越狱）1：已经root（越狱）

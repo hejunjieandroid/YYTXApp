@@ -37,8 +37,9 @@ public class HttpMiddleWare {
 	// public static String initIp = "http://172.16.64.70:3201/portal/";// 测试环境
 	// public static String initIp = "http://172.16.0.18:9104/portal/";//唐顺利
 
-	public static String initIp = "http://192.168.1.105:8080/yld-base-webapp-usermodule/";// 易游通讯测试地址
-
+//	public static String initIp = "http://192.168.1.105:8080/yld-base-webapp-usermodule/";// 易游通讯测试地址
+	public static String initIp = "http://www.elianda.cn/appconnectorin/";// 易游通讯测试地址公网
+	
 	/** 登录接口 */
 	public static final String Trade_Login = "openapi";//
 	/** 登录接口用于注册跳转用 */

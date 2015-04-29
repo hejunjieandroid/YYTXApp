@@ -9,6 +9,12 @@
     <string name="Confirm">确定</string>
     <string name="Cancel">取消</string>
     
+    <!-- 底部导航文字 -->
+    <string name="tv_bottom_left_txt">已购号码</string>
+    <string name="tv_bottom_center_txt">选购号码</string>
+    <string name="tv_bottom_right_txt">客户服务</string>
+    
+    
     <!-- 引导页HomeActivity -->
     <string name="Login">登录</string>
     <string name="Password">密码</string>
@@ -16,7 +22,7 @@
     <string name="btn_buystk_txt">购买易游卡</string>
     
     <!-- 登录页LoginActivity -->
-    <string name="et_userid_hint_txt">账号为国家代码+注册号码</string>
+    <string name="et_userid_hint_txt">账号为手机号/邮箱</string>
     <string name="tv_checkbox_txt">记住账号及密码(自动登录)</string>
     <string name="tv_protocol_txt0">登录即同意</string>
     <string name="tv_protocol_txt1">隐私政策</string>
@@ -30,7 +36,17 @@
     <!-- 忘记密码提交页LoginPasswordForgetSubmitActivity -->
     <string name="et_submit_hint_txt">短信验证码</string>
     <string name="btn_submit_txt">提交</string>
-   
+    
+    <!-- 主页MainFragmentActivity -->
+    <string name="tv_slidemenu_setup_txt">设置</string>
+    
+    <!-- 客户服务 -->
+    <string name="tv_tip_call_txt">请拨打当地客户服务热线为您解决问题</string>
+   <string name="btn_phone_cmhk_txt">CMHK</string>
+   <string name="btn_phone_cmhktw_txt">CMMobile-TW</string>
+   <string name="tv_weixin_txt">微信客服</string>
+   <string name="tv_help_txt">使用教学</string>
+   <string name="btn_we_txt">关于我们</string>
     
 
 </resources>

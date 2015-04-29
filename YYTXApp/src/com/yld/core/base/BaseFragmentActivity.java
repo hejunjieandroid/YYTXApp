@@ -128,11 +128,13 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 	 * @param isShow_backbtn
 	 */
 	public void Show_backbtn(boolean isShow_backbtn) {
-		this.isShow_backbtn = isShow_backbtn;
-		if (isShow_backbtn) {
-			head_back.setVisibility(View.VISIBLE);
-		} else {
-			head_back.setVisibility(View.INVISIBLE);
+		if (head_back != null) {
+			this.isShow_backbtn = isShow_backbtn;
+			if (isShow_backbtn) {
+				head_back.setVisibility(View.VISIBLE);
+			} else {
+				head_back.setVisibility(View.INVISIBLE);
+			}
 		}
 	}
 
@@ -142,11 +144,13 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 	 * @param isShow_homebtn
 	 */
 	public void Show_homebtn(boolean isShow_homebtn) {
-		this.isShow_homebtn = isShow_homebtn;
-		if (isShow_homebtn) {
-			head_home.setVisibility(View.VISIBLE);
-		} else {
-			head_home.setVisibility(View.INVISIBLE);
+		if (head_home != null) {
+			this.isShow_homebtn = isShow_homebtn;
+			if (isShow_homebtn) {
+				head_home.setVisibility(View.VISIBLE);
+			} else {
+				head_home.setVisibility(View.INVISIBLE);
+			}
 		}
 	}
 

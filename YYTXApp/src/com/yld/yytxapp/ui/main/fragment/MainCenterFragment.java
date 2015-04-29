@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 
 import com.yld.core.base.BaseFragment;
 import com.yld.yytxapp.ui.R;
@@ -27,8 +28,23 @@ private View view;
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		view=inflater.inflate(R.layout.fragment_maincenter, null,false);
-		String s="center";
-		listener.onCenterFragment(s);
+		
+		initTitleLayout(view, "选购号码", new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+			}
+		}, new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+			}
+		});
+
+		Show_backbtn(false);
+		
 		return view;
 		
 		

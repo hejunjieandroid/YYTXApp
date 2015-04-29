@@ -7,10 +7,23 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.SlidingMenu.OnClosedListener;
 import com.yld.core.base.BaseFragmentActivity;
+import com.yld.core.utils.AlertUtil;
+import com.yld.yytxapp.adapter.SlidemenuSetupAdapter;
+import com.yld.yytxapp.biz.SlidemenuSetupBiz;
+import com.yld.yytxapp.entity.SlidemenuSetup;
 import com.yld.yytxapp.ui.R;
 import com.yld.yytxapp.ui.main.fragment.MainCenterFragment;
 import com.yld.yytxapp.ui.main.fragment.MainCenterFragment.MainCenterFragmentListener;
@@ -19,12 +32,17 @@ import com.yld.yytxapp.ui.main.fragment.MainLeftFragment.MainLeftFragmentListene
 import com.yld.yytxapp.ui.main.fragment.MainRightFragment;
 import com.yld.yytxapp.ui.main.fragment.MainRightFragment.MainRightFragmentListener;
 
-public class MainFragmentActivity extends BaseFragmentActivity implements OnPageChangeListener, MainLeftFragmentListener, MainCenterFragmentListener, MainRightFragmentListener {
+public class MainFragmentActivity extends BaseFragmentActivity implements OnPageChangeListener, MainLeftFragmentListener, MainCenterFragmentListener, MainRightFragmentListener, OnItemClickListener, OnClickListener {
 
 	private ViewPager viewpager_fragment;// fragment容器
 	private ArrayList<Fragment> fragmentlist;
 
-	private SlidingMenu menu;
+	private SlidingMenu menu;//
+	private ListView lv_slidemenu;// 侧滑菜单
+
+	private RelativeLayout rl_bottom_left, rl_bottom_center, rl_bottom_right;
+	private ImageView img_bottom_left, img_bottom_center, img_bottom_right;
+	private TextView tv_bottom_left, tv_bottom_center, tv_bottom_right;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +53,28 @@ public class MainFragmentActivity extends BaseFragmentActivity implements OnPage
 
 		initSlidemenu();
 
+		initBottom();
 		initFragmentList();
+
+	}
+
+	/**
+	 * 初始化底部导航
+	 */
+	private void initBottom() {
+		// TODO Auto-generated method stub
+		rl_bottom_left = (RelativeLayout) findViewById(R.id.rl_bottom_left);
+		rl_bottom_left.setOnClickListener(this);
+		rl_bottom_center = (RelativeLayout) findViewById(R.id.rl_bottom_center);
+		rl_bottom_center.setOnClickListener(this);
+		rl_bottom_right = (RelativeLayout) findViewById(R.id.rl_bottom_right);
+		rl_bottom_right.setOnClickListener(this);
+		img_bottom_left = (ImageView) findViewById(R.id.img_bottom_left);
+		img_bottom_center = (ImageView) findViewById(R.id.img_bottom_center);
+		img_bottom_right = (ImageView) findViewById(R.id.img_bottom_right);
+		tv_bottom_left = (TextView) findViewById(R.id.tv_bottom_left);
+		tv_bottom_center = (TextView) findViewById(R.id.tv_bottom_center);
+		tv_bottom_right = (TextView) findViewById(R.id.tv_bottom_right);
 	}
 
 	/**
@@ -70,7 +109,10 @@ public class MainFragmentActivity extends BaseFragmentActivity implements OnPage
 	 */
 	private void initSlidemenuList() {
 		// TODO Auto-generated method stub
-
+		lv_slidemenu = (ListView) findViewById(R.id.lv_slidemenu);
+		SlidemenuSetupAdapter adapter = new SlidemenuSetupAdapter(activity, new SlidemenuSetupBiz().getSlidemenuSetups());
+		lv_slidemenu.setAdapter(adapter);
+		lv_slidemenu.setOnItemClickListener(this);
 	}
 
 	/**
@@ -104,6 +146,7 @@ public class MainFragmentActivity extends BaseFragmentActivity implements OnPage
 		});
 		viewpager_fragment.setOffscreenPageLimit(3);
 		viewpager_fragment.setOnPageChangeListener(this);
+		viewpager_fragment.setCurrentItem(0);
 	}
 
 	@Override
@@ -127,7 +170,40 @@ public class MainFragmentActivity extends BaseFragmentActivity implements OnPage
 	@Override
 	public void onPageSelected(int arg0) {
 		// TODO Auto-generated method stub
+		setBottomBg(arg0);
+	}
 
+	/**
+	 * 设置底部导航状态
+	 */
+	private void setBottomBg(int arg0) {
+		// TODO Auto-generated method stub
+		switch (arg0) {
+		case 0:
+			img_bottom_left.setImageResource(R.drawable.bottom_left_img_p);
+			img_bottom_center.setImageResource(R.drawable.bottom_center_img_n);
+			img_bottom_right.setImageResource(R.drawable.bottom_right_img_n);
+			tv_bottom_left.setTextColor(getResources().getColor(R.color.tv_bottom_p));
+			tv_bottom_center.setTextColor(getResources().getColor(R.color.tv_bottom_n));
+			tv_bottom_right.setTextColor(getResources().getColor(R.color.tv_bottom_n));
+			break;
+		case 1:
+			img_bottom_left.setImageResource(R.drawable.bottom_left_img_n);
+			img_bottom_center.setImageResource(R.drawable.bottom_center_img_p);
+			img_bottom_right.setImageResource(R.drawable.bottom_right_img_n);
+			tv_bottom_left.setTextColor(getResources().getColor(R.color.tv_bottom_n));
+			tv_bottom_center.setTextColor(getResources().getColor(R.color.tv_bottom_p));
+			tv_bottom_right.setTextColor(getResources().getColor(R.color.tv_bottom_n));
+			break;
+		case 2:
+			img_bottom_left.setImageResource(R.drawable.bottom_left_img_n);
+			img_bottom_center.setImageResource(R.drawable.bottom_center_img_n);
+			img_bottom_right.setImageResource(R.drawable.bottom_right_img_p);
+			tv_bottom_left.setTextColor(getResources().getColor(R.color.tv_bottom_n));
+			tv_bottom_center.setTextColor(getResources().getColor(R.color.tv_bottom_n));
+			tv_bottom_right.setTextColor(getResources().getColor(R.color.tv_bottom_p));
+			break;
+		}
 	}
 
 	/**
@@ -136,7 +212,6 @@ public class MainFragmentActivity extends BaseFragmentActivity implements OnPage
 	@Override
 	public void onLeftFragment(Object obj) {
 		// TODO Auto-generated method stub
-		menu.toggle();
 	}
 
 	/**
@@ -157,4 +232,61 @@ public class MainFragmentActivity extends BaseFragmentActivity implements OnPage
 
 	}
 
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		// 返回键
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			AlertUtil.ShowAlertDialog(activity, "提示", "退出应用?", false, new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					dialog.dismiss();
+					FinishActivity();
+					android.os.Process.killProcess(android.os.Process.myPid());
+				}
+			}, new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+
+				}
+			});
+
+			return true;
+		} else {
+			return super.onKeyDown(keyCode, event);
+		}
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		// TODO Auto-generated method stub
+		AlertUtil.ToastMessage(activity, ((SlidemenuSetup) parent.getAdapter().getItem(position)).getTitle() + "开发中...", 1);
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		switch (v.getId()) {
+		case R.id.rl_bottom_left:
+			viewpager_fragment.setCurrentItem(0, true);
+			break;
+		case R.id.rl_bottom_center:
+			viewpager_fragment.setCurrentItem(1, true);
+			break;
+		case R.id.rl_bottom_right:
+			viewpager_fragment.setCurrentItem(2, true);
+			break;
+
+		}
+	}
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		setBottomBg(viewpager_fragment.getCurrentItem());
+	}
 }

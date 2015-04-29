@@ -93,6 +93,23 @@ public class JsonUtil {
 	}
 	
 	/**
+	 * @brief 获取json中value
+	 * @param json
+	 *            JSONObject对象
+	 * @return int
+	 * */
+	public static int getJSONInt(JSONObject json,String key){
+		if (json==null) {
+			return 0;
+		}
+		if (json.getString(key)==null) {
+			return 0;
+		}else {
+			return json.getIntValue(key);
+		}
+	}
+	
+	/**
 	 * @brief 获取json中jsonobject
 	 * @param json
 	 *            JSONObject对象

@@ -2,9 +2,153 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
-    android:background="@color/yellow"
-    >
-    
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <include layout="@layout/head" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="15dp"
+            android:layout_weight="1"
+            android:background="#48d2ff"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <TextView
+                style="@style/tv_style"
+                android:layout_marginTop="15dp"
+                android:text="@string/tv_tip_call_txt"
+                android:textColor="@color/white" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/kefu_img" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical" >
+
+                    <Button
+                        android:id="@+id/btn_phone_cmhk"
+                        style="@style/btn_style"
+                        android:background="@drawable/selector_btn_white"
+                        android:text="@string/btn_phone_cmhk_txt"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:textColor="#00c3df" />
+
+                    <Button
+                        android:id="@+id/btn_phone_cmhktw"
+                        style="@style/btn_style"
+                        android:layout_marginTop="10dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:background="@drawable/selector_btn_white"
+                        android:text="@string/btn_phone_cmhktw_txt"
+                        android:textColor="#00c3df" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="15dp"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+            
+            <RelativeLayout 
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:background="#fff192"
+                >
+                <LinearLayout 
+                    android:id="@+id/ll_weixin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerInParent="true"
+                    android:gravity="center_horizontal"
+                    >
+                <ImageView 
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/kefu_weixin_img"
+                    />
+                <TextView 
+                    style="@style/tv_style"
+                    android:text="@string/tv_weixin_txt"
+                    android:textColor="#333333"
+                    android:layout_marginTop="5dp"
+                    />
+                </LinearLayout>
+            </RelativeLayout>
+             <RelativeLayout 
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:background="#aad4ff"
+                android:layout_marginLeft="15dp"
+                >
+                 <LinearLayout 
+                    android:id="@+id/ll_help"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerInParent="true"
+                    android:gravity="center_horizontal"
+                    >
+                <ImageView 
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/kefu_help_img"
+                    />
+                <TextView 
+                    style="@style/tv_style"
+                    android:text="@string/tv_help_txt"
+                    android:textColor="#333333"
+                    android:layout_marginTop="5dp"
+                    />
+                </LinearLayout>
+             </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="15dp"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+             <Button 
+                 android:id="@+id/btn_we"
+                 style="@style/btn_style"
+                 android:text="@string/btn_we_txt"
+                 android:background="@drawable/selector_btn_blue_kefu_we"
+                 />
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

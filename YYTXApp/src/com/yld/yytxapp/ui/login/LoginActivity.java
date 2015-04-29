@@ -158,9 +158,9 @@ public class LoginActivity extends BaseFragmentActivity implements OnClickListen
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("username", et_UserId.getText().toString().trim());
 		map.put("userpwd", et_LoginPassword.getText().toString().trim());
-		map.put("client_id", "alkjsljksdsf_alkjjklsjd_dsalkjsd");
+		map.put("client_id", GetDeviceInfo());
 		map.put("ieme", DeviceUtil.getIMEI(context));
-		
+
 		requestPost(httpMiddleWare.Trade_Login, map, true, new ResultInterface() {
 
 			@Override
@@ -177,34 +177,44 @@ public class LoginActivity extends BaseFragmentActivity implements OnClickListen
 						constant.setToggleString("UserId", "");
 						constant.setToggleString("LoginPassword", "");
 					}
-					
+
 					JSONObject jo = JsonUtil.parseJSONObject(response.toString());
 					JSONObject joo = JsonUtil.getJSONObject(jo, "o");
-					//记住token和超时时间
+					// 记住token和超时时间
 					constant.setToggleString(constant.ACCESS_TOKEN, JsonUtil.getJSONString(joo, "access_token"));
 					constant.setToggleString(constant.EXPIRED, JsonUtil.getJSONString(joo, "expired"));
-					
-					//设置登录状态
-					UserInfo userInfo=new UserInfo();
+
+					// 设置登录状态
+					UserInfo userInfo = new UserInfo();
 					userInfo.setUserName(et_UserId.getText().toString().trim());
 					userInfo.setPassword(et_LoginPassword.getText().toString().trim());
 					userInfo.setAccess_token(JsonUtil.getJSONString(joo, "access_token"));
 					userInfo.setExpired(JsonUtil.getJSONString(joo, "expired"));
 					constant.setLogin(true);
-					
-					//登陆成功跳转
-					
-					
+
+					// 登陆成功跳转
+					StartActivity(MainFragmentActivity.class, null);
+					FinishActivity();
 				}
 			}
 
 			@Override
 			public void onError(Object errorMsg) {
 				// TODO Auto-generated method stub
-
+				StartActivity(MainFragmentActivity.class, null);
+				FinishActivity();
 			}
 		});
-		
+
+	}
+
+	/**
+	 * 获取设备信息
+	 * @return
+	 */
+	private String GetDeviceInfo() {
+		// TODO Auto-generated method stub
+		return DeviceUtil.getDeviceInfo(context).toString();
 	}
 
 	@Override
