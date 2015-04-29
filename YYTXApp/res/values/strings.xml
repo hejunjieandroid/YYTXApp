@@ -13,7 +13,7 @@
     <string name="Login">登录</string>
     <string name="Password">密码</string>
     <string name="btn_stk_txt">激活卡片</string>
-    <string name="btn_buystk_txt">购买贴膜卡</string>
+    <string name="btn_buystk_txt">购买易游卡</string>
     
     <!-- 登录页LoginActivity -->
     <string name="et_userid_hint_txt">账号为国家代码+注册号码</string>
@@ -23,6 +23,14 @@
     <string name="tv_protocol_txt2">及</string>
     <string name="tv_protocol_txt3">服务条款</string>
     <string name="tv_passwordfoget_txt">忘记密码?</string>
+    
+     <!-- 忘记密码页LoginPasswordForgetActivity -->
+    <string name="et_phonenum_hint_txt">手机号码或邮箱</string>
+    <string name="btn_sendSms_txt">发送验证信息</string>
+    <!-- 忘记密码提交页LoginPasswordForgetSubmitActivity -->
+    <string name="et_submit_hint_txt">短信验证码</string>
+    <string name="btn_submit_txt">提交</string>
+   
     
 
 </resources>

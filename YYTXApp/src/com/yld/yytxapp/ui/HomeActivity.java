@@ -2,11 +2,8 @@ package com.yld.yytxapp.ui;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.StringUtils;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -22,10 +19,10 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
 import com.yld.core.base.BaseFragmentActivity;
-import com.yld.core.http.ResultInterface;
-import com.yld.core.utils.AlertUtil;
+import com.yld.core.utils.Util;
 import com.yld.core.view.ViewPagerScroller;
 import com.yld.yytxapp.adapter.MyPagerAdapter;
+import com.yld.yytxapp.entity.UserInfo;
 import com.yld.yytxapp.ui.login.LoginActivity;
 
 public class HomeActivity extends BaseFragmentActivity implements OnClickListener {
@@ -153,7 +150,20 @@ public class HomeActivity extends BaseFragmentActivity implements OnClickListene
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.btn_login:
-			StartActivity(LoginActivity.class, null);
+			if (goLogin()) {
+				StartActivity(LoginActivity.class, null);
+				FinishActivity();
+			} else {
+				UserInfo userInfo = new UserInfo();
+				userInfo.setUserName(constant.getToggleString("UserId"));//不到登录页（是否存储id,checkbox导致）
+				userInfo.setPassword(constant.getToggleString("LoginPassword"));
+				userInfo.setAccess_token(constant.getToggleString(constant.ACCESS_TOKEN));
+				userInfo.setExpired(constant.getToggleString(constant.EXPIRED));
+				
+				constant.setUserInfo(userInfo);
+				constant.setLogin(true);
+			}
+
 			break;
 		case R.id.btn_stk:
 			startActivity(getPackageManager().getLaunchIntentForPackage("com.android.stk"));
@@ -163,6 +173,25 @@ public class HomeActivity extends BaseFragmentActivity implements OnClickListene
 			break;
 
 		}
+	}
+
+	/**
+	 * 判断是否到登录界面
+	 * 
+	 * @return
+	 */
+	private boolean goLogin() {
+		// TODO Auto-generated method stub
+		boolean gotologin = false;
+		if("".equals(constant.getToggleString("UserId"))){
+			gotologin = true;
+		} else if ("".equals(constant.getToggleString(constant.ACCESS_TOKEN)) || "".equals(constant.getToggleString(constant.EXPIRED))) {
+			gotologin = true;
+		} else if (Util.timeFormattimeFormatString2Date(constant.getToggleString(constant.EXPIRED), constant.TIMEFORMAT).before(new Date())) {
+			gotologin = true;
+		}
+
+		return gotologin;
 	}
 
 	/**

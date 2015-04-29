@@ -3,10 +3,9 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    
     <dimen name="all_marginTop">5dip</dimen>
-    
-     <!-- dialog -->
+
+    <!-- dialog -->
     <dimen name="dialog_marginleft">10dip</dimen>
     <dimen name="dialog_marginright">10dip</dimen>
     <dimen name="dialog_all_margin">5dip</dimen>
@@ -16,5 +15,9 @@
     <dimen name="dialog_btn_width">150dip</dimen>
     <dimen name="dialog_btn_height">45dp</dimen>
     <dimen name="dialog_btn_size">16sp</dimen>
+
+    <!-- slidemenu -->
+    <dimen name="slidingmenu_offset">80dp</dimen>
+    <dimen name="shadow_width">0dp</dimen>
 
 </resources>

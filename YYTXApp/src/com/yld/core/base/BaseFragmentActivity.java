@@ -80,6 +80,9 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 	private Handler mHandler;
 	public View view;
 
+	public boolean isShow_backbtn = true;// 是否显示返回按钮
+	public boolean isShow_homebtn = true;// 是否显示回到主页按钮
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -89,22 +92,17 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 		constant = (Constant) context;
 		httpMiddleWare = new HttpMiddleWare(this);
 		mHandler = new Handler();
-		dialog = AlertDialog.createAlertDialog(activity, Constant.ProgressHint,
-				Constant.timeout, new OnTimeOutListener() {
+		dialog = AlertDialog.createAlertDialog(activity, Constant.ProgressHint, Constant.timeout, new OnTimeOutListener() {
 
-					@Override
-					public void onTimeOut(Dialog dialog) {
-						// TODO Auto-generated method stub
-						AlertUtil.ToastMessageShort(
-								activity.getApplicationContext(),
-								Constant.ProgressTimeOutHint);
-					}
-				});
+			@Override
+			public void onTimeOut(Dialog dialog) {
+				// TODO Auto-generated method stub
+				AlertUtil.ToastMessageShort(activity.getApplicationContext(), Constant.ProgressTimeOutHint);
+			}
+		});
 		// 得到activity中的根元素
-//		view = getWindow().getDecorView().findViewById(android.R.id.content);
+		// view = getWindow().getDecorView().findViewById(android.R.id.content);
 	}
-
-	
 
 	/**
 	 * 初始化标题栏
@@ -124,15 +122,43 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 		}
 	}
 
+	/**
+	 * 是否显示返回按钮
+	 * 
+	 * @param isShow_backbtn
+	 */
+	public void Show_backbtn(boolean isShow_backbtn) {
+		this.isShow_backbtn = isShow_backbtn;
+		if (isShow_backbtn) {
+			head_back.setVisibility(View.VISIBLE);
+		} else {
+			head_back.setVisibility(View.INVISIBLE);
+		}
+	}
+
+	/**
+	 * 是否显示回到主页按钮
+	 * 
+	 * @param isShow_homebtn
+	 */
+	public void Show_homebtn(boolean isShow_homebtn) {
+		this.isShow_homebtn = isShow_homebtn;
+		if (isShow_homebtn) {
+			head_home.setVisibility(View.VISIBLE);
+		} else {
+			head_home.setVisibility(View.INVISIBLE);
+		}
+	}
+
 	class onclickListener implements OnClickListener {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			switch (v.getId()) {
 			case R.id.head_back:
-//				if (!(context instanceof WebViewActivity)) {
-					FinishActivity();
-//				}
+				// if (!(context instanceof WebViewActivity)) {
+				FinishActivity();
+				// }
 				break;
 			case R.id.head_home:
 				StartActivity(HomeActivity.class, null);
@@ -152,9 +178,8 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 	 * @param resultInterface
 	 *            请求回调方法
 	 * */
-	public void requestGet(String trade, Map<String, String> map,boolean isAlowHint,
-			ResultInterface resultInterface) {
-		httpMiddleWare.get(trade, map,isAlowHint, resultInterface);
+	public void requestGet(String trade, Map<String, String> map, boolean isAlowHint, ResultInterface resultInterface) {
+		httpMiddleWare.get(trade, map, isAlowHint, resultInterface);
 	}
 
 	/**
@@ -166,9 +191,8 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 	 * @param resultInterface
 	 *            请求回调方法
 	 * */
-	public void requestPost(String trade, Map<String, String> map,boolean isAlowHint,
-			ResultInterface resultInterface) {
-		httpMiddleWare.post(trade, map,isAlowHint, resultInterface);
+	public void requestPost(String trade, Map<String, String> map, boolean isAlowHint, ResultInterface resultInterface) {
+		httpMiddleWare.post(trade, map, isAlowHint, resultInterface);
 	}
 
 	/**
@@ -182,10 +206,8 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 	 * @param errorImageResId
 	 *            请求出错时图片id
 	 * */
-	public void requestImage(String trade, ImageView imageview,
-			int defaultImageResId, int errorImageResId) {
-		httpMiddleWare.ImageExcute(trade, imageview, defaultImageResId,
-				errorImageResId);
+	public void requestImage(String trade, ImageView imageview, int defaultImageResId, int errorImageResId) {
+		httpMiddleWare.ImageExcute(trade, imageview, defaultImageResId, errorImageResId);
 	}
 
 	/**
@@ -199,10 +221,8 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 	 * @param errorImageResId
 	 *            请求出错时图片id
 	 * */
-	public void requestImage(String trade, NetworkImageView networkImageView,
-			int defaultImageResId, int errorImageResId) {
-		httpMiddleWare.ImageExcute(trade, networkImageView, defaultImageResId,
-				errorImageResId);
+	public void requestImage(String trade, NetworkImageView networkImageView, int defaultImageResId, int errorImageResId) {
+		httpMiddleWare.ImageExcute(trade, networkImageView, defaultImageResId, errorImageResId);
 	}
 
 	/**
@@ -214,9 +234,8 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 	 * @param resultInterface
 	 *            请求结果回调方法（回调返回类型bitmap）
 	 * */
-	public void requestImage(String trade, Map<String, String> map,boolean isAlowHint,
-			ResultInterface resultInterface) {
-		httpMiddleWare.ImageExcute(trade, map,isAlowHint, resultInterface);
+	public void requestImage(String trade, Map<String, String> map, boolean isAlowHint, ResultInterface resultInterface) {
+		httpMiddleWare.ImageExcute(trade, map, isAlowHint, resultInterface);
 	}
 
 	/**
@@ -239,8 +258,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 		}
 
 		@Override
-		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
-				float velocityY) {
+		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
 			int width = DeviceUtil.getMetricsWidth(context) / 3;
 			if (e1 != null && e2 != null) {
 				if (e1.getX() - e2.getX() > width && Math.abs(velocityX) > 0) {
@@ -252,8 +270,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 					} else {
 						onTouchListenner(1);
 					}
-				} else if (e2.getX() - e1.getX() > width
-						&& Math.abs(velocityX) > 0) {
+				} else if (e2.getX() - e1.getX() > width && Math.abs(velocityX) > 0) {
 					// 向左手势
 					if (e1.getY() - e2.getY() > 100) {
 
@@ -272,8 +289,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 		}
 
 		@Override
-		public boolean onScroll(MotionEvent e1, MotionEvent e2,
-				float distanceX, float distanceY) {
+		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
 			return false;
 		}
 
@@ -290,7 +306,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
-		if(dialog!=null && dialog.isShowing()) {
+		if (dialog != null && dialog.isShowing()) {
 			dialog.dismiss();
 		}
 		super.onDestroy();
@@ -306,7 +322,8 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 			intent.putExtras(bundle);
 		}
 		activity.startActivity(intent);
-//		overridePendingTransition(R.anim.push_right_in, R.anim.push_left_out);
+		// overridePendingTransition(R.anim.push_right_in,
+		// R.anim.push_left_out);
 	}
 
 	/**
@@ -314,7 +331,8 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 	 * */
 	public void FinishActivity() {
 		activity.finish();
-//		overridePendingTransition(R.anim.push_left_in, R.anim.push_right_out);
+		// overridePendingTransition(R.anim.push_left_in,
+		// R.anim.push_right_out);
 	}
 
 	@Override
@@ -331,8 +349,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 	/**
 	 * startActivityForResult
 	 * */
-	public void startActivityForResult(Class<?> cls, Bundle bundle,
-			ForResultCallBack forResultCallBack) {
+	public void startActivityForResult(Class<?> cls, Bundle bundle, ForResultCallBack forResultCallBack) {
 		this.forResultCallBack = forResultCallBack;
 		Intent intent = new Intent(activity, cls);
 		if (bundle != null) {
@@ -353,10 +370,8 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 	 * 
 	 * */
 	public void replaceFragment(Fragment fragment, int contentId, int stackTag) {
-		FragmentTransaction fragmentTransaction = getSupportFragmentManager()
-				.beginTransaction();
-		fragmentTransaction
-				.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+		FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+		fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 		// fragmentTransaction.setCustomAnimations(R.anim.push_right_in,
 		// R.anim.push_left_out, R.anim.push_left_in,
 		// R.anim.push_right_out);
@@ -369,10 +384,8 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 	 * 添加fragment
 	 * */
 	public void addFragment(Fragment fragment, int contentId, int stackTag) {
-		FragmentTransaction fragmentTransaction = getSupportFragmentManager()
-				.beginTransaction();
-		fragmentTransaction
-				.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+		FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+		fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 		// fragmentTransaction.setCustomAnimations(R.anim.push_right_in,
 		// R.anim.push_left_out, R.anim.push_left_in,
 		// R.anim.push_right_out);
@@ -381,7 +394,6 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 		fragmentTransaction.commit();
 	}
 
-	
 	/**
 	 * activity回调
 	 * */

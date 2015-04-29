@@ -1,5 +1,7 @@
 package com.yld.yytxapp.ui.login;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
 
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -18,8 +21,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.yld.core.base.BaseFragmentActivity;
 import com.yld.core.http.ResultInterface;
 import com.yld.core.utils.AlertUtil;
+import com.yld.core.utils.DeviceUtil;
 import com.yld.core.utils.JsonUtil;
+import com.yld.core.utils.Util;
+import com.yld.yytxapp.entity.UserInfo;
 import com.yld.yytxapp.ui.R;
+import com.yld.yytxapp.ui.main.MainFragmentActivity;
 
 public class LoginActivity extends BaseFragmentActivity implements OnClickListener {
 
@@ -95,13 +102,28 @@ public class LoginActivity extends BaseFragmentActivity implements OnClickListen
 
 			break;
 		case R.id.tv_protocolYs:
-
+			Bundle bundle = new Bundle();
+			bundle.putString("which", "0");
+			StartActivity(LoginProtocolActivity.class, bundle);
 			break;
 		case R.id.tv_protocolFw:
-
+			Bundle bundle1 = new Bundle();
+			bundle1.putString("which", "1");
+			StartActivity(LoginProtocolActivity.class, bundle1);
 			break;
 		case R.id.tv_LoginPasswordForget:
+			if (StringUtils.isEmpty(et_UserId.getText().toString().trim())) {
+				AlertUtil.ShowHintDialog(activity, "提示", "请先输入账号", "确定", false, new OnClickListener() {
 
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+
+					}
+				});
+			} else {
+				StartActivity(LoginPasswordForgetActivity.class, null);
+			}
 			break;
 
 		}
@@ -134,8 +156,11 @@ public class LoginActivity extends BaseFragmentActivity implements OnClickListen
 		// TODO Auto-generated method stub
 		dialog.show();
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("UserId", et_UserId.getText().toString().trim());
-		map.put("LoginPassword", et_LoginPassword.getText().toString().trim());
+		map.put("username", et_UserId.getText().toString().trim());
+		map.put("userpwd", et_LoginPassword.getText().toString().trim());
+		map.put("client_id", "alkjsljksdsf_alkjjklsjd_dsalkjsd");
+		map.put("ieme", DeviceUtil.getIMEI(context));
+		
 		requestPost(httpMiddleWare.Trade_Login, map, true, new ResultInterface() {
 
 			@Override
@@ -152,35 +177,24 @@ public class LoginActivity extends BaseFragmentActivity implements OnClickListen
 						constant.setToggleString("UserId", "");
 						constant.setToggleString("LoginPassword", "");
 					}
-					// JSONObject json = null;
-					// JSONObject account = null;
-					// try {
-					// json = new JSONObject(response.toString());
-					// account = new JSONObject(parserJSONObject(json,
-					// "Account"));
-					// } catch (JSONException e) {
-					// // TODO Auto-generated catch block
-					//
-					// }
-					JSONObject jo=JsonUtil.parseJSONObject(response.toString());
-					JSONObject jo1=JsonUtil.getJSONObject(jo, "o");
-					StringBuffer sb=new StringBuffer();
-					sb.append(JsonUtil.getJSONString(jo, "success")+"\n");
-					sb.append(JsonUtil.getJSONString(jo, "msg")+"\n");
-					sb.append(JsonUtil.getJSONString(jo1, "cess_token")+"\n");
-					sb.append(JsonUtil.getJSONString(jo1, "refresh_token")+"\n");
-					sb.append(JsonUtil.getJSONString(jo1, "token_type")+"\n");
-					sb.append(JsonUtil.getJSONString(jo1, "expires_in")+"\n");
-					sb.append(JsonUtil.getJSONString(jo1, "uid")+"\n");
-					sb.append(response.toString()+"\n");
-					AlertUtil.ShowHintDialog(activity, "提示", sb.toString(), "确定", false, new OnClickListener() {
-
-						@Override
-						public void onClick(View arg0) {
-							// TODO Auto-generated method stub
-
-						}
-					});
+					
+					JSONObject jo = JsonUtil.parseJSONObject(response.toString());
+					JSONObject joo = JsonUtil.getJSONObject(jo, "o");
+					//记住token和超时时间
+					constant.setToggleString(constant.ACCESS_TOKEN, JsonUtil.getJSONString(joo, "access_token"));
+					constant.setToggleString(constant.EXPIRED, JsonUtil.getJSONString(joo, "expired"));
+					
+					//设置登录状态
+					UserInfo userInfo=new UserInfo();
+					userInfo.setUserName(et_UserId.getText().toString().trim());
+					userInfo.setPassword(et_LoginPassword.getText().toString().trim());
+					userInfo.setAccess_token(JsonUtil.getJSONString(joo, "access_token"));
+					userInfo.setExpired(JsonUtil.getJSONString(joo, "expired"));
+					constant.setLogin(true);
+					
+					//登陆成功跳转
+					
+					
 				}
 			}
 
@@ -190,5 +204,36 @@ public class LoginActivity extends BaseFragmentActivity implements OnClickListen
 
 			}
 		});
+		
 	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		// 返回键
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			AlertUtil.ShowAlertDialog(activity, "提示", "退出应用?", false, new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					dialog.dismiss();
+					FinishActivity();
+					android.os.Process.killProcess(android.os.Process.myPid());
+				}
+			}, new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+
+				}
+			});
+
+			return true;
+		} else {
+			return super.onKeyDown(keyCode, event);
+		}
+	}
+
 }

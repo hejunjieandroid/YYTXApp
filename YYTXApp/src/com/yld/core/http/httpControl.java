@@ -127,6 +127,8 @@ public class httpControl {
 					public void onErrorResponse(VolleyError arg0) {
 						LogUtil.d(mContext, "http数据请求错误！");
 						LogUtil.e(mContext, "错误信息：" + arg0.getMessage());
+					
+					
 						if(arg0!=null && arg0.getMessage()!=null) {
 							resultInterface.onError(arg0.getMessage());
 						}else {
@@ -144,6 +146,7 @@ public class httpControl {
 				String rawCookies = responseHeaders.get("Set-Cookie");
 				LogUtil.d(mContext, "服务器返回headers：" + responseHeaders);
 				LogUtil.d(mContext, "服务器返回cookie：" + rawCookies);
+				LogUtil.d(mContext, "服务器返回response：" + response.statusCode);
 				if (rawCookies != null) {
 					// 服务端返回是
 					// set-cookie:JSESSIONID=D90B58454550B4D37C4B66A76BF27B93;
