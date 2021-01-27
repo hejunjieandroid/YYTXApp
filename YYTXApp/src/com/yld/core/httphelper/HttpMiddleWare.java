@@ -32,7 +32,6 @@ public class HttpMiddleWare {
 	// public static String initIp = "http://172.16.0.19:9104/portal/";//菜金虎
 	// public static String initIp = "http://172.16.0.17:9104/portal/";//先宇
 	// public static String initIp = "http://172.16.64.229:9104/portal/";// 测试环境
-	// public static String initIp = "https://zhixiao.cqcbank.com/portal/";//
 	// 内部上线
 	// public static String initIp = "http://172.16.64.70:3201/portal/";// 测试环境
 	// public static String initIp = "http://172.16.0.18:9104/portal/";//唐顺利
